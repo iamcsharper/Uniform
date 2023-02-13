@@ -5,6 +5,7 @@ Uniform is a next-generation toolset for building microservices in typescript
 1. React/SolidJS support for frontend microservices with rich shared ui components library
 2. fastify + typeorm for backend
 3. Nginx, docker, helm, kafka for backend services orchestration and communication
+4. OpenAPI design first approach for building APIs
 
 ## Backlog
 
