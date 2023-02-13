@@ -12,3 +12,4 @@ Uniform is a next-generation toolset for building microservices in typescript
 1. backend services compilation to WASM via https://github.com/AssemblyScript/assemblyscript
 2. powerful CLI with AST support to augment existing codebase with new models, routes, validations, etc.
 3. rich package for solving common issues (authentication, shared database clients, etc)
+4. easy and nice development experience even in local docker environment
