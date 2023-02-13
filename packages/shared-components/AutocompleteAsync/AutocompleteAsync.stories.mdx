@@ -1,0 +1,420 @@
+import { ArgsTable, Meta, Story } from '@storybook/addon-docs';
+import { useState, useCallback } from 'react';
+import Form from '@controls/Form';
+import { scale } from '@scripts/gds';
+import AutocompleteAsync from './';
+
+<Meta title="Controls / Future / AutocompleteAsync" component={AutocompleteAsync} />
+
+# AutocompleteAsync
+
+Автокомплит с поиском на стороне бэкенда. Требует два эндпоинта: 
+
+1) непосредственно поиск (с постраничной навигацией)
+
+2) эндпоинт для получения массива вида `{ label: string; value: any}[]` по массиву значений `value[]`
+
+Может быть представлен как единичным, так и множественным выбором.
+
+<Story
+    name="Basic"
+    args={{
+    }}
+>
+    {args => {
+        const options = [
+            {
+                key: 'laborum est',
+                value: 0,
+            },
+            {
+                key: 'id anim',
+                value: 1,
+            },
+            {
+                key: 'mollit deserunt',
+                value: 2,
+            },
+            {
+                key: 'officia qui',
+                value: 3,
+            },
+            {
+                key: 'culpa in',
+                value: 4,
+            },
+            {
+                key: 'sunt proident',
+                value: 5,
+            },
+            {
+                key: 'non cupidatat',
+                value: 6,
+            },
+            {
+                key: 'occaecat sint',
+                value: 7,
+            },
+            {
+                key: 'excepteur pariatur',
+                value: 8,
+            },
+            {
+                key: 'nulla fugiat',
+                value: 9,
+            },
+            {
+                key: 'eu dolore',
+                value: 10,
+            },
+            {
+                key: 'cillum esse',
+                value: 11,
+            },
+            {
+                key: 'velit voluptate',
+                value: 12,
+            },
+            {
+                key: 'in reprehenderit',
+                value: 13,
+            },
+            {
+                key: 'in dolor',
+                value: 14,
+            },
+            {
+                key: 'irure aute',
+                value: 15,
+            },
+            {
+                key: 'duis consequat',
+                value: 16,
+            },
+            {
+                key: 'commodo ea',
+                value: 17,
+            },
+            {
+                key: 'ex aliquip',
+                value: 18,
+            },
+            {
+                key: 'ut nisi',
+                value: 19,
+            },
+            {
+                key: 'laboris ullamco',
+                value: 20,
+            },
+            {
+                key: 'exercitation nostrud',
+                value: 21,
+            },
+            {
+                key: 'quis veniam',
+                value: 22,
+            },
+            {
+                key: 'minim ad',
+                value: 23,
+            },
+            {
+                key: 'enim ut',
+                value: 24,
+            },
+            {
+                key: 'aliqua magna',
+                value: 25,
+            },
+            {
+                key: 'dolore et',
+                value: 26,
+            },
+            {
+                key: 'labore ut',
+                value: 27,
+            },
+            {
+                key: 'incididunt tempor',
+                value: 28,
+            },
+            {
+                key: 'eiusmod do',
+                value: 29,
+            },
+            {
+                key: 'sed elit',
+                value: 30,
+            },
+            {
+                key: 'adipiscing consectetur',
+                value: 31,
+            },
+            {
+                key: 'amet sit',
+                value: 32,
+            },
+            {
+                key: 'dolor ipsum',
+                value: 33,
+            },
+        ];
+        const asyncSearchFn = useCallback(async (offset, limit, searchStr) => {
+            return new Promise(resolve => {
+                const total = options.filter(e => e.key.includes(searchStr));
+                const slice = total.slice(offset, offset + limit);
+                const hasMore = offset + limit < total.length;
+                console.log(
+                    '[loading] offset:',
+                    offset,
+                    'limit:',
+                    limit,
+                    'has more:',
+                    hasMore,
+                    'result=',
+                    slice,
+                    'total=',
+                    total
+                );
+                setTimeout(() => resolve({ options: slice, hasMore }), 1500);
+            });
+        }, []);
+        const asyncOptionsByValuesFn = useCallback(async vals => {
+            return new Promise(resolve => {
+                console.log('[loading by values]:', vals);
+                const total = options.filter(e => vals.includes(e.value));
+                setTimeout(() => resolve(total), 1800);
+            });
+        }, []);
+        return (
+            <Form initialValues={{ autocomplete: 13 }}>
+                {({ values }) => (
+                    <>
+                        <h2>Единственный выбор:</h2>
+                        <p>Выбрано: {JSON.stringify(values.autocomplete)}</p>
+                        <Form.Field
+                            name="autocomplete"
+                            label="Автокомплит"
+                            css={{ marginBottom: scale(2), maxWidth: `${scale(60)}px!important` }}
+                        >
+                            <AutocompleteAsync
+                                {...args}
+                                block
+                                asyncSearchFn={asyncSearchFn}
+                                asyncOptionsByValuesFn={asyncOptionsByValuesFn}
+                                placeholder="Начинайте вводить"
+                            />
+                        </Form.Field>
+                    </>
+                )}
+            </Form>
+        );
+    }}
+</Story>
+
+<Story
+    name="Multiple"
+    args={{
+        clearOnSelect: false,
+        collapseTagList: true,
+    }}
+>
+    {args => {
+        const options = [
+            {
+                key: 'laborum est',
+                value: 0,
+            },
+            {
+                key: 'id anim',
+                value: 1,
+            },
+            {
+                key: 'mollit deserunt',
+                value: 2,
+            },
+            {
+                key: 'officia qui',
+                value: 3,
+            },
+            {
+                key: 'culpa in',
+                value: 4,
+            },
+            {
+                key: 'sunt proident',
+                value: 5,
+            },
+            {
+                key: 'non cupidatat',
+                value: 6,
+            },
+            {
+                key: 'occaecat sint',
+                value: 7,
+            },
+            {
+                key: 'excepteur pariatur',
+                value: 8,
+            },
+            {
+                key: 'nulla fugiat',
+                value: 9,
+            },
+            {
+                key: 'eu dolore',
+                value: 10,
+            },
+            {
+                key: 'cillum esse',
+                value: 11,
+            },
+            {
+                key: 'velit voluptate',
+                value: 12,
+            },
+            {
+                key: 'in reprehenderit',
+                value: 13,
+            },
+            {
+                key: 'in dolor',
+                value: 14,
+            },
+            {
+                key: 'irure aute',
+                value: 15,
+            },
+            {
+                key: 'duis consequat',
+                value: 16,
+            },
+            {
+                key: 'commodo ea',
+                value: 17,
+            },
+            {
+                key: 'ex aliquip',
+                value: 18,
+            },
+            {
+                key: 'ut nisi',
+                value: 19,
+            },
+            {
+                key: 'laboris ullamco',
+                value: 20,
+            },
+            {
+                key: 'exercitation nostrud',
+                value: 21,
+            },
+            {
+                key: 'quis veniam',
+                value: 22,
+            },
+            {
+                key: 'minim ad',
+                value: 23,
+            },
+            {
+                key: 'enim ut',
+                value: 24,
+            },
+            {
+                key: 'aliqua magna',
+                value: 25,
+            },
+            {
+                key: 'dolore et',
+                value: 26,
+            },
+            {
+                key: 'labore ut',
+                value: 27,
+            },
+            {
+                key: 'incididunt tempor',
+                value: 28,
+            },
+            {
+                key: 'eiusmod do',
+                value: 29,
+            },
+            {
+                key: 'sed elit',
+                value: 30,
+            },
+            {
+                key: 'adipiscing consectetur',
+                value: 31,
+            },
+            {
+                key: 'amet sit',
+                value: 32,
+            },
+            {
+                key: 'dolor ipsum',
+                value: 33,
+            },
+        ];
+        const asyncSearchFn = useCallback(async (offset, limit, searchStr) => {
+            return new Promise(resolve => {
+                const total = options.filter(e => e.key.includes(searchStr));
+                const slice = total.slice(offset, offset + limit);
+                const hasMore = offset + limit < total.length;
+                console.log(
+                    '[loading] offset:',
+                    offset,
+                    'limit:',
+                    limit,
+                    'has more:',
+                    hasMore,
+                    'result=',
+                    slice,
+                    'total=',
+                    total
+                );
+                setTimeout(() => resolve({ options: slice, hasMore }), 1500);
+            });
+        }, []);
+        const asyncOptionsByValuesFn = useCallback(async vals => {
+            return new Promise(resolve => {
+                console.log('[loading by values]:', vals);
+                const total = options.filter(e => vals.includes(e.value));
+                setTimeout(() => resolve(total), 1800);
+            });
+        }, []);
+        return (
+            <Form initialValues={{ autocomplete: [13, 14, 15, 31] }}>
+                {({ values }) => (
+                    <>
+                        <h2>Множественный выбор:</h2>
+                        <p>Выбрано: {JSON.stringify(values.autocomplete)}</p>
+                        <Form.Field
+                            name="autocomplete"
+                            label="Автокомплит"
+                            css={{ marginBottom: scale(2), maxWidth: `${scale(60)}px!important` }}
+                        >
+                            <AutocompleteAsync
+                                {...args}
+                                block
+                                multiple
+                                asyncSearchFn={asyncSearchFn}
+                                asyncOptionsByValuesFn={asyncOptionsByValuesFn}
+                                placeholder="Выберите элемент"
+                            />
+                        </Form.Field>
+                    </>
+                )}
+            </Form>
+        );
+    }}
+</Story>
+
+<br />
+
+## Args Table
+
+<ArgsTable of={AutocompleteAsync}/>

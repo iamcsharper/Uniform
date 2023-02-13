@@ -1,0 +1,52 @@
+import { ArgsTable, Meta, Story } from '@storybook/addon-docs';
+import { formControlThemes } from '@controls/future/FormControl/themes';
+import { FormControlSize } from '@controls/future/FormControl/types';
+import ChevronRight from '@icons/small/chevronRight.svg';
+import ProfileIcon from '@icons/small/user.svg';
+import Input from '.';
+
+<Meta title="Controls / Future / Form / Input" component={Input} />
+
+# Input
+
+Компонент текстового поля ввода
+
+<Story
+    name="Input"
+    args={{
+        type: 'text',
+        block: false,
+        size: 'md',
+        variant: 'primary',
+        theme: 'basic',
+        clear: false,
+        disabled: false,
+        error: '',
+        hint: '',
+        label: 'Логин',
+        labelWrap: true,
+        defaultValue: 'login@mail.ru',
+        readOnly: false,
+        placeholder: 'Введите логин',
+        withIcon: true,
+    }}
+    argTypes={{
+        theme: {
+            options: Object.keys(formControlThemes),
+            control: { type: 'radio' },
+        },
+        size: {
+            options: Object.values(FormControlSize),
+            control: { type: 'radio' },
+        },
+    }}
+>
+    {({ withIcon, ...args }) => <Input id="example-input" rightAddons={withIcon ? <ProfileIcon /> : null} {...args} />}
+</Story>
+
+Может работать в `controlled` и `uncontrolled` режимах. Переключение осуществляется передачей `value`. Принимает `ref`, который применяется к `input`.
+Может иметь крестик для очистки ввода, включается флагом `clear`. Крестик станет доступен при наличии значения и отсутствии `disabled`
+
+## Props
+
+<ArgsTable story="Input" />

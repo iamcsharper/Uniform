@@ -1,0 +1,56 @@
+{
+    "private": true,
+    "name": "shared-components",
+    "description": "Shared UI components",
+    "scripts": {
+        "build": "rollup -c --bundleConfigAsCjs"
+    },
+    "keywords": [],
+    "author": "",
+    "files": [
+        "dist"
+    ],
+    "types": "dist/index.d.ts",
+    "license": "ISC",
+    "main": "dist/cjs/index.js",
+    "module": "dist/esm/index.js",
+    "dependencies": {
+        "@emotion/react": "^11.10.5",
+        "@emotion/styled": "^11.10.5",
+        "@juggle/resize-observer": "^3.4.0",
+        "@popperjs/core": "^2.11.6",
+        "classnames": "2.3.1",
+        "deepmerge": "4.2.2",
+        "downshift": "6.1.7",
+        "popper-max-size-modifier": "^0.2.0",
+        "react": "^18.2.0",
+        "react-accessible-accordion": "^5.0.0",
+        "react-dom": "^18.2.0",
+        "react-focus-lock": "^2.9.2",
+        "react-hook-form": "^7.42.1",
+        "react-imask": "6.0.7",
+        "react-loading-skeleton": "^3.1.0",
+        "react-merge-refs": "1.1.0",
+        "react-popper": "^2.3.0",
+        "react-transition-group": "^4.4.5",
+        "transition-hook": "^1.5.2"
+    },
+    "devDependencies": {
+        "@babel/core": "7.14.3",
+        "@emotion/babel-plugin": "^11.10.2",
+        "@emotion/babel-preset-css-prop": "11.2.0",
+        "@open-wc/building-rollup": "^2.2.1",
+        "@rollup/plugin-commonjs": "^24.0.1",
+        "@rollup/plugin-image": "^3.0.2",
+        "@rollup/plugin-node-resolve": "^15.0.1",
+        "@rollup/plugin-typescript": "^11.0.0",
+        "@types/node": "^18.11.19",
+        "@types/react": "^18.0.24",
+        "@types/react-dom": "^18.0.6",
+        "@types/react-transition-group": "4.4.1",
+        "rollup": "^3.14.0",
+        "rollup-plugin-dts": "^5.1.1",
+        "rollup-plugin-peer-deps-external": "^2.2.4",
+        "rollup-plugin-postcss": "^4.0.2"
+    }
+}

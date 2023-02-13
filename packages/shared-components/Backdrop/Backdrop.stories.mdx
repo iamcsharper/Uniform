@@ -1,0 +1,53 @@
+import { action } from '@storybook/addon-actions';
+import { ArgsTable, Meta, Story } from '@storybook/addon-docs';
+import { useState } from 'react';
+import { Button } from '@scripts/gds';
+import Backdrop from '.';
+
+<Meta title="Controls / Future / Backdrop" component={Backdrop} />
+
+# Backdrop
+
+Компонент для затемнения экрана при открытии модальных окон
+
+```js
+import Backdrop from '@controls/future/Backdrop';
+
+const [isOpen, setOpen] = useState(false);
+
+return (
+    <Portal>
+        <Backdrop open={isOpen} onClose={() => setOpen(false)} />
+    </Portal>
+);
+```
+
+<Story
+    name="Basic"
+    args={{
+        invisible: false,
+    }}
+>
+    {(args) => {
+        const [isOpen, setOpen] = useState(false);
+        return (
+            <div style={{ zIndex: 1, position: 'relative' }}>
+                <Button onClick={() => setOpen(!isOpen)}>{isOpen ? 'Close' : 'Open'} me</Button>
+                <Backdrop
+                    {...args}
+                    open={isOpen}
+                    onClose={e => {
+                        setOpen(false);
+                        action(e)();
+                    }}
+                >
+                    Dummy content in background
+                </Backdrop>
+            </div>
+        );
+    }}
+</Story>
+
+## Props
+
+<ArgsTable story="Basic" />

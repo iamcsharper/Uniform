@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "target": "es2016",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "skipLibCheck": true,
+        "jsx": "react-jsx",
+        "module": "ESNext",
+        "declaration": true,
+        "declarationDir": "types",
+        "sourceMap": true,
+        "outDir": "dist",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "emitDeclarationOnly": true,
+        "jsxImportSource": "@emotion/react",
+        "paths": {
+            "@icons/*": ["./common/icons/*"],
+            "@common/*": ["./common/*"],
+            "@root/*": ["./*"]
+        }
+    },
+    "ts-node": {
+        "swc": true
+    },
+    "include": ["global.d.ts", "**/*.ts", "**/*.tsx"],
+    "exclude": ["node_modules"]
+}
